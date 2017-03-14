@@ -1,0 +1,81 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kit Kats per Baby</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script>
+	var myApp = angular.module('myApp', []);
+	myApp.controller("myCtrl", function ($scope) {
+		$scope.ready = false;
+	    $scope.calculate = function (lb, oz) {
+	    	if (!oz) { oz = 0; }
+        	var ozs = (lb * 16) + oz;
+        	var kgs = ozs * 0.0283495;
+        	var grams = kgs * 1000;
+        	var fingers4 = 45;
+        	var fingers2 = 21;
+        	var num2s = parseInt(grams / fingers2);
+        	var num4s = parseInt(grams / fingers4);
+        	console.log(num2s+", "+num4s);
+        	var cals = parseInt(kgs * 10 * 510);
+        	var fat = parseInt(kgs * 10 * 24.8);
+        	var sat = parseInt(kgs * 10 * 14.1);
+        	var carb = parseInt(kgs * 10 * 64.6);
+        	var fibr = parseInt(kgs * 10 * 2);
+        	var slt = parseInt(kgs * 10 * 0.2);
+        	$scope.res4 = num4s;
+        	$scope.res2 = num2s;
+        	$scope.calories = cals;
+        	$scope.fats = fat;
+        	$scope.saturated = sat;
+        	$scope.carbs = carb;
+        	$scope.fibre = fibr;
+        	$scope.salt = slt;
+        	$scope.ready = true;
+    	}
+	});
+	</script>
+	<style>
+	.bigger { 
+		font-size: 2em; 
+		padding-left: 1em;
+	}
+	.inp {
+		width: 4em;
+	}
+	</style>
+  </head>
+  <body>
+  	<div class="container" ng-app="myApp" ng-controller="myCtrl">
+  	  <h1>Babies to Kit Kats Calculator</h1>
+  	  <br />
+  	  <p>Enter the baby's weight :	  <input type="number" class="inp" maxlength="4" size="2" ng-model="lb">lb <input type="number" class="inp" maxlength="2" size="2" ng-model="oz">oz
+  	  <input type="button" value="Calculate" ng-click="calculate(lb,oz)" /></p>
+  	  <div id="results" ng-show="ready" class="ng-cloak">
+  	  <div class="well well-lg">
+  	  <h4>{{lb}}lb {{oz}}oz is equal to</h4>
+  	  <p class="bigger">
+  	  <b>{{res4}}</b> 4-finger kit-kats or <br />
+  	  <b>{{res2}}</b> 2-finger kit-kats.
+  	  </p>
+  	  </div>
+  	   <div  class="well">
+  	   <p>If the baby were entirely made of kit-kat, the nutritional value would be:</p>
+  	   <ul>
+  	     <li>Calories <b>{{calories}}</b>kcal</li>
+  	     <li>Fat <b>{{fats}}</b>g</li>
+  	     <li>of which saturated <b>{{saturated}}</b>g</li>
+  	     <li>Carbohydrates <b>{{carbs}}</b>g</li>
+  	     <li>Fibre <b>{{fibre}}</b>g</li>
+  	     <li>Salt <b>{{salt}}</b>g</li>
+  	   </ul>
+  	   </div>
+  	   </div>
+  	</div>
+  </body>
+</html>
